@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEX — Learn AI for Real</title>
+<style>
+  :root {
+    --bg:      #f5f5f0;
+    --ink:     #0d0d0d;
+    --muted:   #6b6b6b;
+    --accent:  #00e87a;
+    --surface: #ffffff;
+    --border:  #e2e2dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 56px;
+    background: rgba(245,245,240,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav-logo span {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 2px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.18s;
+  }
+
+  nav ul a:hover { color: var(--ink); }
+
+  .nav-btn {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+  }
+
+  .nav-btn:hover { background: #333; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 100px 56px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-text { max-width: 560px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(0,232,122,0.1);
+    border: 1px solid rgba(0,232,122,0.25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1.0;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--muted);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 420px;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .btn-dark {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+  }
+
+  .btn-dark:hover { background: #333; transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.18s, transform 0.18s;
+  }
+
+  .btn-outline:hover { border-color: #aaa; transform: translateY(-2px); }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .avatars {
+    display: flex;
+  }
+
+  .avatars svg { margin-right: -8px; border: 2px solid var(--bg); border-radius: 50%; }
+
+  .social-proof p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .social-proof strong { color: var(--ink); }
+
+  /* Hero laptop mockup */
+  .hero-visual { position: relative; }
+
+  /* ── BENTO ── */
+  .bento-wrap {
+    padding: 0 56px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+
+  .bento-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    transition: transform 0.25s, border-color 0.25s;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bento-cell:hover { transform: translateY(-4px); border-color: #c8c8c0; }
+
+  .bento-cell.wide  { grid-column: span 2; }
+  .bento-cell.dark  { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .bento-cell.green { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+
+  .bento-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .dark  .bento-label { color: rgba(255,255,255,0.4); }
+  .green .bento-label { color: rgba(0,0,0,0.5); }
+
+  .bento-num {
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .bento-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  .bento-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .dark .bento-desc  { color: rgba(255,255,255,0.5); }
+  .green .bento-desc { color: rgba(0,0,0,0.6); }
+
+  /* ── COURSES ── */
+  .courses-wrap {
+    padding: 80px 56px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+  }
+
+  .link-arrow {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.18s, gap 0.18s;
+  }
+
+  .link-arrow:hover { color: var(--ink); gap: 10px; }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .course-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+
+  .course-card:hover { transform: translateY(-5px); border-color: #c8c8c0; }
+
+  .course-bar {
+    height: 4px;
+    width: 100%;
+  }
+
+  .bar-green  { background: var(--accent); }
+  .bar-yellow { background: #f5c518; }
+  .bar-pink   { background: #ff6b9d; }
+
+  .course-thumb-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .course-body {
+    padding: 24px;
+  }
+
+  .course-level {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .course-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+
+  .course-desc-sm {
+    font-size: 0.83rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.55;
+  }
+
+  .course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .course-cta {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.18s;
+  }
+
+  .course-cta:hover { gap: 8px; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-wrap {
+    background: var(--ink);
+    padding: 80px 56px;
+  }
+
+  .testi-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .testi-inner .tag { background: rgba(0,232,122,0.12); }
+
+  .testi-inner h2 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: #fff;
+    margin-bottom: 48px;
+    margin-top: 12px;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 40px;
+    transition: border-color 0.25s;
+  }
+
+  .testi-card:hover { border-color: rgba(0,232,122,0.3); }
+
+  .quote-mark {
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+
+  .testi-text {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .testi-author {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .testi-role {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 3px;
+  }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--ink);
+    padding: 0 56px 80px;
+  }
+
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--accent);
+    border-radius: 24px;
+    padding: 72px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .cta-inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .btn-cta {
+    flex-shrink: 0;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 18px 40px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+    white-space: nowrap;
+  }
+
+  .btn-cta:hover { background: #333; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: var(--bg);
+    flex-wrap: wrap;
+  }
+
+  footer p { font-size: 0.8rem; color: var(--muted); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: color 0.18s;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 80px 24px 60px; gap: 48px; }
+    .hero h1 { font-size: 3rem; }
+    .bento-wrap, .courses-wrap { padding: 0 24px 60px; }
+    .bento { grid-template-columns: 1fr; }
+    .bento-cell.wide { grid-column: span 1; }
+    .courses-grid { grid-template-columns: 1fr; }
+    .testi-wrap  { padding: 60px 24px; }
+    .testi-grid  { grid-template-columns: 1fr; }
+    .cta-banner  { padding: 0 24px 60px; }
+    .cta-inner   { flex-direction: column; padding: 48px 32px; text-align: center; }
+    footer { padding: 24px; flex-direction: column; text-align: center; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav>
+  <a class="nav-logo" href="#"><span>N</span>EX</a>
+  <ul>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <button class="nav-btn">Start free</button>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="tag">✦ Now open to all levels</div>
+
+    <h1>The AI course<br>you'll <em>actually</em><br>finish.</h1>
+
+    <p class="hero-sub">Project-first learning for builders. Skip the theory spiral — write real code from day one and deploy something before your trial ends.</p>
+
+    <div class="hero-actions">
+      <button class="btn-dark">Explore courses →</button>
+      <button class="btn-outline">See how it works</button>
+    </div>
+
+    <div class="social-proof">
+      <div class="avatars">
+        <!-- 5 simple avatar circles -->
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#7c3aed"/>
+          <circle cx="16" cy="13" r="5" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="16" cy="28" rx="9" ry="7" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#059669"/>
+          <circle cx="16" cy="13" r="5" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="16" cy="28" rx="9" ry="7" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#2563eb"/>
+          <circle cx="16" cy="13" r="5" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="16" cy="28" rx="9" ry="7" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#d97706"/>
+          <circle cx="16" cy="13" r="5" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="16" cy="28" rx="9" ry="7" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#dc2626"/>
+          <circle cx="16" cy="13" r="5" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="16" cy="28" rx="9" ry="7" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+      </div>
+      <p><strong>48,000+</strong> learners already building</p>
+    </div>
+  </div>
+
+  <!-- Laptop mockup -->
+  <div class="hero-visual reveal">
+    <svg width="100%" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+      <!-- Laptop body -->
+      <rect x="30" y="20" width="460" height="290" rx="14" fill="#1a1a1a"/>
+      <rect x="44" y="34" width="432" height="262" rx="6" fill="#0d0d0d"/>
+
+      <!-- Screen content: sidebar -->
+      <rect x="44" y="34" width="90" height="262" rx="0" fill="#111"/>
+      <rect x="58" y="52" width="36" height="8" rx="4" fill="#00e87a" opacity="0.9"/>
+      <rect x="58" y="74" width="50" height="6" rx="3" fill="#ffffff" opacity="0.12"/>
+      <rect x="58" y="90" width="44" height="6" rx="3" fill="#ffffff" opacity="0.07"/>
+      <rect x="58" y="106" width="48" height="6" rx="3" fill="#ffffff" opacity="0.07"/>
+      <rect x="58" y="122" width="40" height="6" rx="3" fill="#ffffff" opacity="0.07"/>
+
+      <!-- Screen content: main area -->
+      <!-- Video area -->
+      <rect x="148" y="48" width="200" height="118" rx="8" fill="#1e1e1e"/>
+      <circle cx="248" cy="107" r="22" fill="#00e87a" opacity="0.15"/>
+      <circle cx="248" cy="107" r="14" fill="#00e87a" opacity="0.5"/>
+      <polygon points="244,101 244,113 256,107" fill="white" opacity="0.9"/>
+
+      <!-- Progress bar -->
+      <rect x="148" y="176" width="200" height="5" rx="2.5" fill="#2a2a2a"/>
+      <rect x="148" y="176" width="110" height="5" rx="2.5" fill="#00e87a"/>
+
+      <!-- Text lines below video -->
+      <rect x="148" y="192" width="140" height="8" rx="4" fill="#ffffff" opacity="0.15"/>
+      <rect x="148" y="206" width="100" height="6" rx="3" fill="#ffffff" opacity="0.07"/>
+      <rect x="148" y="220" width="120" height="6" rx="3" fill="#ffffff" opacity="0.07"/>
+
+      <!-- Code snippet block -->
+      <rect x="360" y="48" width="104" height="126" rx="8" fill="#1e1e1e"/>
+      <rect x="370" y="62" width="30" height="6" rx="3" fill="#00e87a" opacity="0.7"/>
+      <rect x="370" y="76" width="70" height="5" rx="2.5" fill="#ffffff" opacity="0.15"/>
+      <rect x="370" y="88" width="55" height="5" rx="2.5" fill="#ffffff" opacity="0.1"/>
+      <rect x="380" y="100" width="60" height="5" rx="2.5" fill="#f5c518" opacity="0.5"/>
+      <rect x="380" y="112" width="45" height="5" rx="2.5" fill="#ffffff" opacity="0.08"/>
+      <rect x="370" y="124" width="20" height="5" rx="2.5" fill="#ffffff" opacity="0.15"/>
+      <!-- Green cursor -->
+      <rect x="391" y="138" width="2" height="10" rx="1" fill="#00e87a"/>
+
+      <!-- Chat row at bottom -->
+      <rect x="148" y="248" width="316" height="36" rx="8" fill="#1e1e1e"/>
+      <rect x="162" y="260" width="200" height="6" rx="3" fill="#ffffff" opacity="0.1"/>
+      <circle cx="432" cy="266" r="8" fill="#00e87a" opacity="0.6"/>
+
+      <!-- Laptop base -->
+      <rect x="0" y="310" width="520" height="14" rx="4" fill="#222"/>
+      <rect x="200" y="310" width="120" height="5" rx="2" fill="#333"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ════════ BENTO GRID ════════ -->
+<div class="bento-wrap">
+  <div class="bento reveal" id="how">
+
+    <!-- A: Wide — Learn by building -->
+    <div class="bento-cell wide">
+      <div class="bento-label">Methodology</div>
+      <div class="bento-title">Learn by building.</div>
+      <div class="bento-desc" style="margin-bottom: 28px;">Every lesson ends with deployed, working code. Not exercises. Real projects you can show people.</div>
+      <!-- Minimal code snippet SVG -->
+      <svg width="100%" viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg">
+        <rect width="420" height="80" rx="10" fill="#0d0d0d"/>
+        <rect x="16" y="16" width="52" height="8" rx="4" fill="#00e87a" opacity="0.8"/>
+        <rect x="72" y="16" width="16" height="8" rx="4" fill="#ffffff" opacity="0.2"/>
+        <rect x="92" y="16" width="80" height="8" rx="4" fill="#60a5fa" opacity="0.7"/>
+        <rect x="176" y="16" width="20" height="8" rx="4" fill="#ffffff" opacity="0.2"/>
+        <rect x="16" y="34" width="32" height="8" rx="4" fill="#f472b6" opacity="0.7"/>
+        <rect x="52" y="34" width="60" height="8" rx="4" fill="#fbbf24" opacity="0.6"/>
+        <rect x="116" y="34" width="100" height="8" rx="4" fill="#ffffff" opacity="0.12"/>
+        <rect x="32" y="52" width="80" height="8" rx="4" fill="#a78bfa" opacity="0.5"/>
+        <rect x="116" y="52" width="48" height="8" rx="4" fill="#ffffff" opacity="0.1"/>
+        <rect x="168" y="52" width="3" height="14" rx="1" fill="#00e87a"/>
+      </svg>
+    </div>
+
+    <!-- B: Stat -->
+    <div class="bento-cell green">
+      <div class="bento-label">Completion</div>
+      <div class="bento-num">94%</div>
+      <div class="bento-desc">of learners finish their first project</div>
+    </div>
+
+    <!-- C: Stat — dark -->
+    <div class="bento-cell dark">
+      <div class="bento-label">Content</div>
+      <div class="bento-num" style="color: var(--accent);">120+</div>
+      <div class="bento-desc">hours of hands-on lessons</div>
+    </div>
+
+    <!-- D: AI Feedback -->
+    <div class="bento-cell">
+      <div class="bento-label">Feature</div>
+      <div class="bento-title">AI tutor, always on.</div>
+      <div class="bento-desc" style="margin-bottom: 24px;">Write code, get instant feedback. Like pair programming with a senior engineer at 3am.</div>
+      <!-- Chat bubble SVG -->
+      <svg width="100%" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="200" height="44" rx="12" fill="#0d0d0d"/>
+        <rect x="14" y="14" width="160" height="8" rx="4" fill="#ffffff" opacity="0.15"/>
+        <rect x="14" y="26" width="100" height="7" rx="3" fill="#ffffff" opacity="0.08"/>
+        <rect x="56" y="44" width="200" height="34" rx="12" fill="#00e87a"/>
+        <rect x="70" y="56" width="140" height="8" rx="4" fill="rgba(0,0,0,0.4)"/>
+        <rect x="70" y="68" width="80" height="6" rx="3" fill="rgba(0,0,0,0.2)"/>
+      </svg>
+    </div>
+
+    <!-- E: Wide — course preview -->
+    <div class="bento-cell wide dark">
+      <div class="bento-label">Live preview</div>
+      <div class="bento-title">Lesson 4 — Training your first model</div>
+      <!-- Lesson progress mockup -->
+      <div style="display: flex; gap: 8px; margin: 20px 0 10px;">
+        <div style="height: 4px; flex: 1; background: #00e87a; border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: #00e87a; border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: #00e87a; border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
+        <div style="height: 4px; flex: 1; background: rgba(255,255,255,0.12); border-radius: 2px;"></div>
+      </div>
+      <div class="bento-desc">Lesson 4 of 7 · 18 min remaining</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════ COURSES ════════ -->
+<div class="courses-wrap" id="courses">
+  <div class="section-header">
+    <div>
+      <div class="tag">Curriculum</div>
+      <h2 style="margin-top: 12px;">Three tracks.<br>One goal.</h2>
+    </div>
+    <a href="#" class="link-arrow">See all courses →</a>
+  </div>
+
+  <div class="courses-grid reveal">
+
+    <!-- Course 1 -->
+    <div class="course-card">
+      <div class="course-bar bar-green"></div>
+      <svg class="course-thumb-wrap" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="225" fill="#f0fdf4"/>
+        <!-- Abstract: concentric circles -->
+        <circle cx="200" cy="112" r="90" fill="none" stroke="#00e87a" stroke-width="1" opacity="0.3"/>
+        <circle cx="200" cy="112" r="65" fill="none" stroke="#00e87a" stroke-width="1" opacity="0.4"/>
+        <circle cx="200" cy="112" r="42" fill="none" stroke="#00e87a" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="200" cy="112" r="22" fill="#00e87a" opacity="0.2"/>
+        <circle cx="200" cy="112" r="10" fill="#00e87a" opacity="0.8"/>
+        <!-- Node dots on outer ring -->
+        <circle cx="290" cy="112" r="5" fill="#059669"/>
+        <circle cx="110" cy="112" r="5" fill="#059669"/>
+        <circle cx="200" cy="22"  r="5" fill="#059669"/>
+        <circle cx="200" cy="202" r="5" fill="#059669"/>
+        <line x1="200" y1="102" x2="290" y2="112" stroke="#059669" stroke-width="1" opacity="0.4"/>
+        <line x1="200" y1="102" x2="110" y2="112" stroke="#059669" stroke-width="1" opacity="0.4"/>
+        <line x1="200" y1="102" x2="200" y2="22"  stroke="#059669" stroke-width="1" opacity="0.4"/>
+        <line x1="200" y1="102" x2="200" y2="202" stroke="#059669" stroke-width="1" opacity="0.4"/>
+      </svg>
+      <div class="course-body">
+        <div class="course-level">Beginner · 18 hrs</div>
+        <div class="course-name">Deep Learning from Scratch</div>
+        <div class="course-desc-sm">Build neural networks in pure Python before touching PyTorch. Understand what's actually happening.</div>
+        <div class="course-footer">
+          <span>12 projects · ★ 4.9</span>
+          <a href="#" class="course-cta">Start →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course 2 -->
+    <div class="course-card">
+      <div class="course-bar bar-yellow"></div>
+      <svg class="course-thumb-wrap" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="225" fill="#fffbeb"/>
+        <!-- Abstract: grid pattern -->
+        <line x1="100" y1="0"   x2="100" y2="225" stroke="#f5c518" stroke-width="0.8" opacity="0.3"/>
+        <line x1="200" y1="0"   x2="200" y2="225" stroke="#f5c518" stroke-width="0.8" opacity="0.3"/>
+        <line x1="300" y1="0"   x2="300" y2="225" stroke="#f5c518" stroke-width="0.8" opacity="0.3"/>
+        <line x1="0"   y1="75"  x2="400" y2="75"  stroke="#f5c518" stroke-width="0.8" opacity="0.3"/>
+        <line x1="0"   y1="150" x2="400" y2="150" stroke="#f5c518" stroke-width="0.8" opacity="0.3"/>
+        <!-- Highlighted square -->
+        <rect x="100" y="75" width="100" height="75" fill="#f5c518" opacity="0.15"/>
+        <rect x="200" y="75" width="100" height="75" fill="#f5c518" opacity="0.08"/>
+        <!-- Chat bubbles overlaid -->
+        <rect x="120" y="92"  width="140" height="28" rx="8" fill="#f5c518" opacity="0.6"/>
+        <rect x="140" y="130" width="140" height="28" rx="8" fill="#1a1a1a" opacity="0.7"/>
+        <rect x="134" y="100" width="100" height="8" rx="4" fill="rgba(0,0,0,0.3)"/>
+        <rect x="154" y="138" width="100" height="8" rx="4" fill="rgba(255,255,255,0.3)"/>
+      </svg>
+      <div class="course-body">
+        <div class="course-level">Intermediate · 24 hrs</div>
+        <div class="course-name">LLM Engineering & Prompting</div>
+        <div class="course-desc-sm">RAG pipelines, function calling, structured outputs, and shipping LLM-powered apps that actually work.</div>
+        <div class="course-footer">
+          <span>8 projects · ★ 4.8</span>
+          <a href="#" class="course-cta">Start →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course 3 -->
+    <div class="course-card">
+      <div class="course-bar bar-pink"></div>
+      <svg class="course-thumb-wrap" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="225" fill="#fff1f6"/>
+        <!-- Abstract: flowing wave / pipeline -->
+        <path d="M 40 112 C 100 60, 160 170, 200 112 S 300 60, 360 112" fill="none" stroke="#ff6b9d" stroke-width="2" opacity="0.4"/>
+        <path d="M 40 112 C 100 60, 160 170, 200 112 S 300 60, 360 112" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.2" transform="translate(0, 20)"/>
+        <path d="M 40 112 C 100 60, 160 170, 200 112 S 300 60, 360 112" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.15" transform="translate(0, -20)"/>
+        <!-- Stage nodes -->
+        <circle cx="40"  cy="112" r="8" fill="#ff6b9d" opacity="0.7"/>
+        <circle cx="120" cy="86"  r="8" fill="#ff6b9d" opacity="0.7"/>
+        <circle cx="200" cy="112" r="12" fill="#ff6b9d"/>
+        <circle cx="280" cy="86"  r="8" fill="#ff6b9d" opacity="0.7"/>
+        <circle cx="360" cy="112" r="8" fill="#ff6b9d" opacity="0.7"/>
+        <!-- Labels -->
+        <rect x="26" y="126"  width="28" height="7" rx="3" fill="#ff6b9d" opacity="0.3"/>
+        <rect x="106" y="100" width="28" height="7" rx="3" fill="#ff6b9d" opacity="0.3"/>
+        <rect x="186" y="130" width="28" height="7" rx="3" fill="#ff6b9d" opacity="0.5"/>
+        <rect x="266" y="100" width="28" height="7" rx="3" fill="#ff6b9d" opacity="0.3"/>
+        <rect x="346" y="126" width="28" height="7" rx="3" fill="#ff6b9d" opacity="0.3"/>
+      </svg>
+      <div class="course-body">
+        <div class="course-level">Advanced · 32 hrs</div>
+        <div class="course-name">MLOps — Deploy & Scale AI</div>
+        <div class="course-desc-sm">Production pipelines, model monitoring, Docker, Kubernetes, and serving ML at scale on cloud infrastructure.</div>
+        <div class="course-footer">
+          <span>6 projects · ★ 4.9</span>
+          <a href="#" class="course-cta">Start →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<div class="testi-wrap">
+  <div class="testi-inner">
+    <div class="tag">Reviews</div>
+    <h2>Don't take our word for it.</h2>
+
+    <div class="testi-grid reveal">
+
+      <div class="testi-card">
+        <div class="quote-mark">"</div>
+        <p class="testi-text">I went from zero ML knowledge to deploying my own image classifier in 6 weeks. The project-first structure is the only thing that's ever worked for me — I've tried everything else.</p>
+        <div class="testi-author">Sarah K.</div>
+        <div class="testi-role">Frontend Dev → ML Engineer at Scale AI</div>
+      </div>
+
+      <div class="testi-card">
+        <div class="quote-mark">"</div>
+        <p class="testi-text">The LLM Engineering track alone paid for itself. I used what I learned to build a product that landed my first consulting contract two weeks after finishing.</p>
+        <div class="testi-author">Marcus T.</div>
+        <div class="testi-role">Founder, AI consulting practice</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════ CTA BANNER ════════ -->
+<div class="cta-banner">
+  <div class="cta-inner reveal">
+    <h2>Your first project<br>ships in 14 days.</h2>
+    <button class="btn-cta">Start free — no card needed</button>
+  </div>
+</div>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <a class="nav-logo" href="#" style="text-decoration:none;"><span>N</span>EX</a>
+  <p>© 2025 Nex AI Inc. · Built for curious builders.</p>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Careers</a>
+    <a href="#">Twitter</a>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
