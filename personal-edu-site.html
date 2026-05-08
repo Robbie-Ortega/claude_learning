@@ -3,16 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maya Chen — Educator & Builder</title>
+<title>Robbie Ortega — Builder · Engineer · AI</title>
 <style>
   :root {
-    --cream:   #faf7f2;
-    --ink:     #1c1207;
-    --warm:    #7a5c3a;
-    --accent:  #d4622a;
-    --soft:    #f0ebe1;
-    --border:  #e3ddd4;
-    --muted:   #8a7d6e;
+    --bg:      #080810;
+    --surface: #0f0f1a;
+    --card:    #14141f;
+    --border:  #1e1e2e;
+    --text:    #f0f0f8;
+    --muted:   #6b7280;
+    --accent:  #818cf8;
+    --amber:   #f59e0b;
+    --cyan:    #22d3ee;
+    --warm:    #a5a8c0;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,8 +23,8 @@
 
   body {
     font-family: Georgia, 'Times New Roman', serif;
-    background: var(--cream);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.65;
   }
 
@@ -34,8 +37,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 60px;
-    background: rgba(250,247,242,0.9);
-    backdrop-filter: blur(12px);
+    background: rgba(8,8,16,0.88);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
 
@@ -44,17 +47,13 @@
     font-weight: normal;
     font-style: italic;
     letter-spacing: 0.2px;
-    color: var(--ink);
+    color: var(--text);
     text-decoration: none;
   }
 
   .logo strong { font-style: normal; font-weight: bold; }
 
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 32px;
-  }
+  nav ul { list-style: none; display: flex; gap: 32px; }
 
   nav ul a {
     text-decoration: none;
@@ -66,7 +65,7 @@
     transition: color 0.18s;
   }
 
-  nav ul a:hover { color: var(--ink); }
+  nav ul a:hover { color: var(--text); }
 
   .nav-contact {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
@@ -100,6 +99,18 @@
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    flex-shrink: 0;
   }
 
   .hero h1 {
@@ -108,43 +119,60 @@
     letter-spacing: -1.5px;
     line-height: 1.1;
     margin-bottom: 28px;
+    color: var(--text);
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
 
   .hero-bio {
-    font-size: 1.1rem;
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
     color: var(--warm);
     max-width: 480px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     line-height: 1.75;
   }
 
-  .hero-links {
+  .hero-tags {
     display: flex;
-    gap: 24px;
+    gap: 8px;
     flex-wrap: wrap;
+    margin-bottom: 36px;
   }
 
-  .btn-ink {
+  .tag {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
-    background: var(--ink);
-    color: var(--cream);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  .tag-accent { color: var(--accent); border-color: rgba(129,140,248,0.3); background: rgba(129,140,248,0.08); }
+  .tag-amber  { color: var(--amber);  border-color: rgba(245,158,11,0.3);  background: rgba(245,158,11,0.08);  }
+  .tag-cyan   { color: var(--cyan);   border-color: rgba(34,211,238,0.3);  background: rgba(34,211,238,0.08);  }
+
+  .hero-links { display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .btn-primary {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    background: var(--accent);
+    color: #0a0a14;
     border: none;
     padding: 13px 28px;
     border-radius: 6px;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     transition: background 0.18s, transform 0.18s;
   }
 
-  .btn-ink:hover { background: #2d2014; transform: translateY(-2px); }
+  .btn-primary:hover { background: #a5b4fc; transform: translateY(-2px); }
 
   .btn-text {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
@@ -160,13 +188,9 @@
     padding-bottom: 1px;
   }
 
-  .btn-text:hover { color: var(--ink); border-color: var(--ink); gap: 10px; }
+  .btn-text:hover { color: var(--text); border-color: var(--muted); gap: 10px; }
 
-  /* Portrait card */
-  .portrait-card {
-    position: sticky;
-    top: 88px;
-  }
+  .portrait-card { position: sticky; top: 88px; }
 
   /* ── DIVIDER ── */
   .divider {
@@ -204,18 +228,53 @@
     max-width: 640px;
   }
 
-  .about-text strong { color: var(--ink); font-weight: bold; }
+  .about-text strong { color: var(--text); font-weight: bold; }
+
+  /* ── METRICS STRIP ── */
+  .metrics-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 44px 60px;
+  }
+
+  .metrics-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .metric-item { text-align: center; }
+
+  .metric-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .metric-value .highlight { color: var(--accent); }
+
+  .metric-label {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
   /* ── TOPICS ── */
   .topics-section {
-    background: var(--ink);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     padding: 80px 60px;
   }
 
-  .topics-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+  .topics-inner { max-width: 1100px; margin: 0 auto; }
 
   .topics-header {
     display: flex;
@@ -228,7 +287,7 @@
     font-size: clamp(2rem, 3.5vw, 2.8rem);
     font-weight: bold;
     letter-spacing: -1px;
-    color: var(--cream);
+    color: var(--text);
     line-height: 1.15;
   }
 
@@ -238,30 +297,26 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    background: rgba(255,255,255,0.06);
     border-radius: 16px;
     overflow: hidden;
+    border: 1px solid var(--border);
   }
 
   .topic-cell {
-    background: rgba(255,255,255,0.03);
+    background: var(--card);
     padding: 36px 32px;
     transition: background 0.2s;
     cursor: default;
   }
 
-  .topic-cell:hover { background: rgba(255,255,255,0.07); }
+  .topic-cell:hover { background: #1a1a2a; }
 
-  .topic-icon {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-    display: block;
-  }
+  .topic-icon { font-size: 1.8rem; margin-bottom: 16px; display: block; }
 
   .topic-name {
     font-size: 1.05rem;
     font-weight: bold;
-    color: var(--cream);
+    color: var(--text);
     margin-bottom: 8px;
     letter-spacing: -0.3px;
   }
@@ -269,7 +324,7 @@
   .topic-desc {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
     font-size: 0.82rem;
-    color: rgba(255,255,255,0.38);
+    color: var(--muted);
     line-height: 1.6;
   }
 
@@ -291,6 +346,7 @@
     font-size: clamp(1.8rem, 3vw, 2.4rem);
     font-weight: bold;
     letter-spacing: -0.8px;
+    color: var(--text);
   }
 
   .see-all {
@@ -317,22 +373,17 @@
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
-    background: var(--surface, #fff);
+    background: var(--card);
     transition: transform 0.22s, border-color 0.22s;
     cursor: pointer;
-    background: white;
   }
 
-  .post-card:hover { transform: translateY(-4px); border-color: #c9c2b6; }
+  .post-card:hover { transform: translateY(-4px); border-color: rgba(129,140,248,0.35); }
 
   .post-card.featured { grid-row: span 2; }
 
-  .post-thumb {
-    width: 100%;
-    display: block;
-  }
-
-  .post-thumb.tall { aspect-ratio: 4/3; }
+  .post-thumb { width: 100%; display: block; }
+  .post-thumb.tall  { aspect-ratio: 4/3; }
   .post-thumb.short { aspect-ratio: 16/9; }
 
   .post-body { padding: 24px; }
@@ -353,10 +404,11 @@
     letter-spacing: -0.3px;
     line-height: 1.3;
     margin-bottom: 10px;
+    color: var(--text);
   }
 
   .post-card.featured .post-title {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     letter-spacing: -0.5px;
     line-height: 1.25;
   }
@@ -377,43 +429,38 @@
     gap: 12px;
   }
 
-  /* ── RESOURCES ── */
+  /* ── PROJECTS ── */
   .resources-section {
-    background: var(--soft);
+    background: var(--surface);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 80px 60px;
   }
 
-  .resources-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+  .resources-inner { max-width: 1100px; margin: 0 auto; }
 
   .resources-inner h2 {
     font-size: clamp(1.8rem, 3vw, 2.4rem);
     font-weight: bold;
     letter-spacing: -0.8px;
     margin-bottom: 8px;
+    color: var(--text);
   }
 
   .resources-inner > p {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     color: var(--muted);
     margin-bottom: 48px;
   }
 
-  .resources-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
+  .resources-list { display: flex; flex-direction: column; gap: 6px; }
 
   .resource-row {
     display: flex;
     align-items: center;
     gap: 28px;
-    background: white;
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px 28px;
@@ -423,7 +470,7 @@
     color: inherit;
   }
 
-  .resource-row:hover { border-color: #c9c2b6; transform: translateX(4px); }
+  .resource-row:hover { border-color: rgba(129,140,248,0.4); transform: translateX(4px); }
 
   .resource-icon {
     width: 48px;
@@ -443,6 +490,7 @@
     font-weight: bold;
     letter-spacing: -0.2px;
     margin-bottom: 4px;
+    color: var(--text);
   }
 
   .resource-desc {
@@ -458,6 +506,7 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--muted);
+    white-space: nowrap;
   }
 
   .resource-arrow {
@@ -485,11 +534,13 @@
     letter-spacing: -1px;
     line-height: 1.15;
     margin-bottom: 16px;
+    color: var(--text);
   }
 
   .newsletter h2 em { color: var(--accent); font-style: italic; }
 
   .newsletter p {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     color: var(--warm);
     line-height: 1.7;
@@ -504,14 +555,13 @@
     border: 1.5px solid var(--border);
     border-radius: 8px;
     font-size: 0.9rem;
-    background: white;
-    color: var(--ink);
+    background: var(--card);
+    color: var(--text);
     outline: none;
     transition: border-color 0.18s;
   }
 
   .nl-form input:focus { border-color: var(--accent); }
-
   .nl-form input::placeholder { color: var(--muted); }
 
   .nl-note {
@@ -530,7 +580,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    background: var(--cream);
+    background: var(--surface);
   }
 
   footer p {
@@ -539,10 +589,7 @@
     color: var(--muted);
   }
 
-  .footer-links {
-    display: flex;
-    gap: 24px;
-  }
+  .footer-links { display: flex; gap: 24px; }
 
   .footer-links a {
     font-family: -apple-system, 'Helvetica Neue', sans-serif;
@@ -552,7 +599,7 @@
     transition: color 0.18s;
   }
 
-  .footer-links a:hover { color: var(--ink); }
+  .footer-links a:hover { color: var(--text); }
 
   /* ── REVEAL ── */
   .reveal {
@@ -570,6 +617,8 @@
     .hero { grid-template-columns: 1fr; padding: 60px 24px 48px; gap: 48px; }
     .portrait-card { position: static; }
     .about-strip { grid-template-columns: 1fr; padding: 48px 24px; gap: 16px; }
+    .metrics-strip { padding: 40px 24px; }
+    .metrics-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .topics-section, .resources-section { padding: 60px 24px; }
     .topics-grid { grid-template-columns: 1fr; }
     .writing-section { padding: 60px 24px; }
@@ -586,64 +635,114 @@
 <nav>
   <a class="logo" href="#"><strong>Robbie</strong> Ortega</a>
   <ul>
-    <li><a href="#topics">Topics</a></li>
+    <li><a href="#topics">Areas</a></li>
     <li><a href="#writing">Writing</a></li>
-    <li><a href="#resources">Resources</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#newsletter">Newsletter</a></li>
   </ul>
-  <a href="#newsletter" class="nav-contact">Get in touch</a>
+  <a href="https://www.linkedin.com/in/robertoortegalopez/" class="nav-contact" target="_blank">Connect →</a>
 </nav>
 
 <!-- ════ HERO ════ -->
 <div class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Educator · Writer · Builder</div>
-    <h1>I teach things<br>the way I wish<br>I'd <em>learned</em> them.</h1>
+    <div class="hero-eyebrow">Partner Eng Lead · AI Builder · CDMX</div>
+    <h1>I lead teams,<br>build AI,<br>and <em>ship things</em>.</h1>
     <p class="hero-bio">
-      I've spent 10 years learning how humans actually understand hard concepts — and building courses, essays, and tools that reflect that. Based in San Francisco. Currently obsessed with AI, mathematics, and the science of learning itself.
+      Partner Engineering Lead for Grocery &amp; Retail at Uber Eats (Américas). Master's student in Applied AI. Building a computer vision platform for dog daycares — because great products start with a real problem.
     </p>
+    <div class="hero-tags">
+      <span class="tag tag-accent">Computer Vision</span>
+      <span class="tag tag-amber">Applied ML</span>
+      <span class="tag tag-cyan">LLMs &amp; Agents</span>
+      <span class="tag tag-accent">API Integrations</span>
+      <span class="tag tag-amber">Data &amp; Python</span>
+    </div>
     <div class="hero-links">
-      <a href="#writing" class="btn-ink">Read my writing →</a>
-      <a href="#resources" class="btn-text">Browse resources →</a>
+      <a href="#projects" class="btn-primary">See what I'm building →</a>
+      <a href="#writing" class="btn-text">Read my writing →</a>
     </div>
   </div>
 
-  <!-- Portrait mockup -->
+  <!-- Portrait card — CV detection visual -->
   <div class="portrait-card reveal">
     <svg width="100%" viewBox="0 0 380 480" xmlns="http://www.w3.org/2000/svg">
-      <!-- Card background -->
-      <rect width="380" height="480" rx="20" fill="#f0ebe1"/>
-      <!-- Portrait area -->
-      <rect x="0" y="0" width="380" height="320" rx="20" fill="#d4c8b8"/>
-      <!-- Bottom corners back to square -->
-      <rect x="0" y="300" width="380" height="20" fill="#d4c8b8"/>
-      <!-- Abstract person silhouette -->
-      <circle cx="190" cy="130" r="58" fill="#b8a898"/>
-      <ellipse cx="190" cy="310" rx="100" ry="80" fill="#b8a898"/>
-      <!-- Warm tinted overlay for personality -->
-      <rect x="0" y="0" width="380" height="320" fill="#d4622a" opacity="0.08" rx="20"/>
+      <rect width="380" height="480" rx="20" fill="#0f0f1a"/>
+      <!-- Camera feed area -->
+      <rect x="0" y="0" width="380" height="300" rx="20" fill="#14141f"/>
+      <rect x="0" y="280" width="380" height="20" fill="#14141f"/>
+      <!-- Grid overlay -->
+      <line x1="0" y1="100" x2="380" y2="100" stroke="#818cf8" stroke-width="0.4" opacity="0.12"/>
+      <line x1="0" y1="200" x2="380" y2="200" stroke="#818cf8" stroke-width="0.4" opacity="0.12"/>
+      <line x1="127" y1="0" x2="127" y2="300" stroke="#818cf8" stroke-width="0.4" opacity="0.12"/>
+      <line x1="254" y1="0" x2="254" y2="300" stroke="#818cf8" stroke-width="0.4" opacity="0.12"/>
 
-      <!-- Decorative dots top-right -->
-      <circle cx="334" cy="32" r="4" fill="#d4622a" opacity="0.5"/>
-      <circle cx="350" cy="32" r="4" fill="#d4622a" opacity="0.3"/>
-      <circle cx="334" cy="48" r="4" fill="#d4622a" opacity="0.3"/>
-      <circle cx="350" cy="48" r="4" fill="#d4622a" opacity="0.2"/>
+      <!-- Primary bounding box -->
+      <rect x="52" y="42" width="180" height="196" rx="3" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0.65"/>
+      <!-- Corner marks primary -->
+      <polyline points="52,62 52,42 72,42"    fill="none" stroke="#818cf8" stroke-width="2.5"/>
+      <polyline points="212,42 232,42 232,62"  fill="none" stroke="#818cf8" stroke-width="2.5"/>
+      <polyline points="52,218 52,238 72,238"  fill="none" stroke="#818cf8" stroke-width="2.5"/>
+      <polyline points="212,238 232,238 232,218" fill="none" stroke="#818cf8" stroke-width="2.5"/>
+      <!-- Label chip primary -->
+      <rect x="52" y="28" width="76" height="16" rx="3" fill="#818cf8"/>
+      <rect x="58" y="33" width="56" height="5" rx="2" fill="#0f0f1a" opacity="0.9"/>
+      <!-- Confidence -->
+      <rect x="138" y="28" width="52" height="16" rx="3" fill="#22d3ee" opacity="0.18"/>
+      <rect x="144" y="33" width="36" height="5" rx="2" fill="#22d3ee" opacity="0.7"/>
 
-      <!-- Caption area -->
-      <rect x="24" y="340" width="160" height="12" rx="6" fill="#1c1207" opacity="0.7"/>
-      <rect x="24" y="360" width="110" height="9" rx="4" fill="#1c1207" opacity="0.3"/>
+      <!-- Secondary bounding box -->
+      <rect x="258" y="82" width="102" height="108" rx="3" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.6"/>
+      <polyline points="258,94 258,82 270,82"  fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <polyline points="348,82 360,82 360,94"  fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <polyline points="258,178 258,190 270,190" fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <polyline points="348,190 360,190 360,178" fill="none" stroke="#f59e0b" stroke-width="2"/>
+      <!-- Label chip secondary -->
+      <rect x="258" y="68" width="62" height="16" rx="3" fill="#f59e0b" opacity="0.85"/>
+      <rect x="264" y="73" width="46" height="5" rx="2" fill="#0f0f1a" opacity="0.9"/>
 
-      <!-- Tag chip -->
-      <rect x="24" y="390" width="80" height="24" rx="12" fill="#d4622a" opacity="0.15"/>
-      <rect x="32" y="399" width="60" height="7" rx="3" fill="#d4622a" opacity="0.5"/>
+      <!-- Tracking trail (object path) -->
+      <circle cx="142" cy="140" r="3.5" fill="#818cf8" opacity="0.9"/>
+      <circle cx="134" cy="156" r="2.8" fill="#818cf8" opacity="0.65"/>
+      <circle cx="128" cy="172" r="2.2" fill="#818cf8" opacity="0.45"/>
+      <circle cx="122" cy="188" r="1.6" fill="#818cf8" opacity="0.28"/>
 
-      <rect x="116" y="390" width="96" height="24" rx="12" fill="#1c1207" opacity="0.07"/>
-      <rect x="124" y="399" width="76" height="7" rx="3" fill="#1c1207" opacity="0.2"/>
+      <!-- REC indicator -->
+      <circle cx="350" cy="26" r="6" fill="#ef4444" opacity="0.9"/>
+      <rect x="20" y="22" width="28" height="9" rx="2" fill="#ef4444" opacity="0.15"/>
+      <rect x="23" y="24.5" width="20" height="4" rx="1" fill="#ef4444" opacity="0.55"/>
 
-      <!-- Bottom strip -->
-      <rect x="24" y="436" width="332" height="1" fill="#1c1207" opacity="0.1"/>
-      <rect x="24" y="452" width="200" height="8" rx="4" fill="#1c1207" opacity="0.12"/>
-      <rect x="336" y="450" width="20" height="12" rx="2" fill="#d4622a" opacity="0.4"/>
+      <!-- FPS counter top right area -->
+      <rect x="286" y="14" width="54" height="14" rx="3" fill="#22d3ee" opacity="0.1"/>
+      <rect x="291" y="18" width="40" height="5" rx="2" fill="#22d3ee" opacity="0.4"/>
+
+      <!-- Bottom data panel -->
+      <!-- Top row label -->
+      <rect x="20" y="316" width="120" height="9" rx="4" fill="#818cf8" opacity="0.55"/>
+      <rect x="20" y="333" width="80" height="7" rx="3" fill="#f0f0f8" opacity="0.14"/>
+
+      <!-- Metric chips row -->
+      <rect x="20" y="358" width="64" height="22" rx="6" fill="#818cf8" opacity="0.12"/>
+      <rect x="26" y="364" width="48" height="6" rx="2" fill="#818cf8" opacity="0.55"/>
+
+      <rect x="92" y="358" width="64" height="22" rx="6" fill="#22d3ee" opacity="0.1"/>
+      <rect x="98" y="364" width="48" height="6" rx="2" fill="#22d3ee" opacity="0.45"/>
+
+      <rect x="164" y="358" width="64" height="22" rx="6" fill="#f59e0b" opacity="0.1"/>
+      <rect x="170" y="364" width="48" height="6" rx="2" fill="#f59e0b" opacity="0.45"/>
+
+      <!-- Progress bar -->
+      <rect x="20" y="400" width="340" height="6" rx="3" fill="#1e1e2e"/>
+      <rect x="20" y="400" width="224" height="6" rx="3" fill="#818cf8" opacity="0.75"/>
+
+      <!-- Bottom lines -->
+      <rect x="20" y="424" width="200" height="7" rx="3" fill="#f0f0f8" opacity="0.1"/>
+      <rect x="20" y="439" width="140" height="6" rx="3" fill="#f0f0f8" opacity="0.07"/>
+
+      <!-- Status badge bottom right -->
+      <rect x="292" y="418" width="68" height="30" rx="8" fill="#818cf8" opacity="0.14"/>
+      <rect x="298" y="424" width="52" height="6" rx="2" fill="#818cf8" opacity="0.6"/>
+      <rect x="308" y="433" width="32" height="5" rx="2" fill="#818cf8" opacity="0.3"/>
     </svg>
   </div>
 </div>
@@ -654,48 +753,70 @@
 <div class="about-strip">
   <div class="about-label">About</div>
   <div class="about-text">
-    I started as a math teacher in public school, moved into curriculum design at Khan Academy, and eventually built my own courses on AI and statistics. I believe <strong>the best explanation is the one that makes the reader feel smart</strong> — not the one that proves the writer is. Right now I'm writing a book, running a newsletter, and occasionally consulting for EdTech companies who want their content to actually work.
+    I lead Partner Engineering for Grocery &amp; Retail across the Americas at Uber Eats — a team of ~12 engineers focused on catalog quality, API integrations, and merchant success. In parallel, I'm completing a <strong>Master's in Applied AI</strong> and building a <strong>computer vision platform</strong> that tracks dogs in daycares using YOLOv8, multi-object tracking, and LLM-generated behavioral summaries. I think in frameworks, operate with data, and build things that scale.
   </div>
 </div>
 
 <hr class="divider">
 
+<!-- ════ METRICS STRIP ════ -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <div class="metric-value">~12<span class="highlight">×</span></div>
+      <div class="metric-label">Team (LatAm)</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">YOLOv<span class="highlight">8</span></div>
+      <div class="metric-label">CV Stack</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">Msc<span class="highlight">AI</span></div>
+      <div class="metric-label">En progreso</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-value">2<span class="highlight">🐶</span></div>
+      <div class="metric-label">Azula &amp; Chowi</div>
+    </div>
+  </div>
+</div>
+
 <!-- ════ TOPICS ════ -->
 <div class="topics-section" id="topics">
   <div class="topics-inner">
     <div class="topics-header">
-      <h2>What I write<br>& teach about.</h2>
+      <h2>What I build,<br>learn &amp; <em>write about</em>.</h2>
     </div>
     <div class="topics-grid reveal">
       <div class="topic-cell">
-        <span class="topic-icon">◎</span>
-        <div class="topic-name">Artificial Intelligence</div>
-        <div class="topic-desc">How models actually work, stripped of hype. ML intuition, LLMs, and what AI can and cannot do.</div>
+        <span class="topic-icon">👁</span>
+        <div class="topic-name">Computer Vision</div>
+        <div class="topic-desc">YOLOv8, multi-object tracking (Norfair, DeepSort), RTSP streams, and end-to-end CV pipelines from raw camera to structured log.</div>
       </div>
       <div class="topic-cell">
-        <span class="topic-icon">∫</span>
-        <div class="topic-name">Mathematics</div>
-        <div class="topic-desc">Calculus, linear algebra, and probability taught through real problems — not symbol manipulation.</div>
+        <span class="topic-icon">◎</span>
+        <div class="topic-name">Applied ML</div>
+        <div class="topic-desc">Clustering, PCA, regression — ML that solves real problems. No hype, just models that generalize and metrics that mean something.</div>
       </div>
       <div class="topic-cell">
         <span class="topic-icon">⬡</span>
-        <div class="topic-name">Learning Science</div>
-        <div class="topic-desc">Memory, spaced repetition, interleaving, and the cognitive research that actually changes how you study.</div>
+        <div class="topic-name">LLMs &amp; Agents</div>
+        <div class="topic-desc">Building with language models: semantic behavioral logs, automated summaries, and agentic pipelines with structured prompts.</div>
       </div>
       <div class="topic-cell">
         <span class="topic-icon">{ }</span>
-        <div class="topic-name">Programming</div>
-        <div class="topic-desc">Python for data, building small tools, and developing the habit of thinking computationally.</div>
+        <div class="topic-name">Data &amp; Python</div>
+        <div class="topic-desc">EDA, pandas, metrics design, and the analytical pipelines behind operational decisions at scale. Presto &amp; Spark fluent.</div>
       </div>
       <div class="topic-cell">
         <span class="topic-icon">✦</span>
-        <div class="topic-name">Curriculum Design</div>
-        <div class="topic-desc">The craft behind great educational content — sequencing, feedback loops, and avoiding the curse of knowledge.</div>
+        <div class="topic-name">Partner Engineering</div>
+        <div class="topic-desc">Catalog quality, API integrations (POS, order, catalog), and the technical strategy behind merchant growth and platform adoption.</div>
       </div>
       <div class="topic-cell">
         <span class="topic-icon">○</span>
-        <div class="topic-name">Personal Essays</div>
-        <div class="topic-desc">Slower, more personal writing on teaching, working in public, and learning as an adult.</div>
+        <div class="topic-name">Building in Public</div>
+        <div class="topic-desc">Documenting the journey: building an AI startup while leading a global team. Systems thinking meets first-principles entrepreneurship.</div>
       </div>
     </div>
   </div>
@@ -705,7 +826,7 @@
 <div class="writing-section" id="writing">
   <div class="section-row">
     <h2>Recent writing.</h2>
-    <a href="#" class="see-all">All essays →</a>
+    <a href="#" class="see-all">All posts →</a>
   </div>
 
   <div class="posts-grid reveal">
@@ -713,29 +834,44 @@
     <!-- Featured post -->
     <div class="post-card featured">
       <svg class="post-thumb tall" viewBox="0 0 500 375" xmlns="http://www.w3.org/2000/svg">
-        <rect width="500" height="375" fill="#fdf3ed"/>
-        <!-- Large abstract circle composition -->
-        <circle cx="350" cy="80" r="120" fill="#d4622a" opacity="0.12"/>
-        <circle cx="120" cy="300" r="80" fill="#d4622a" opacity="0.08"/>
-        <!-- Title text mockup lines -->
-        <rect x="40" y="140" width="300" height="22" rx="4" fill="#1c1207" opacity="0.14"/>
-        <rect x="40" y="170" width="260" height="22" rx="4" fill="#1c1207" opacity="0.14"/>
-        <rect x="40" y="200" width="200" height="22" rx="4" fill="#1c1207" opacity="0.10"/>
-        <!-- Accent line -->
-        <rect x="40" y="110" width="40" height="4" rx="2" fill="#d4622a" opacity="0.8"/>
-        <!-- Paragraph lines lower -->
-        <rect x="40" y="254" width="280" height="8" rx="4" fill="#1c1207" opacity="0.07"/>
-        <rect x="40" y="270" width="240" height="8" rx="4" fill="#1c1207" opacity="0.07"/>
-        <rect x="40" y="286" width="200" height="8" rx="4" fill="#1c1207" opacity="0.07"/>
+        <rect width="500" height="375" fill="#0d0d1a"/>
+        <!-- Camera feed grid -->
+        <line x1="0" y1="125" x2="500" y2="125" stroke="#818cf8" stroke-width="0.5" opacity="0.1"/>
+        <line x1="0" y1="250" x2="500" y2="250" stroke="#818cf8" stroke-width="0.5" opacity="0.1"/>
+        <line x1="166" y1="0" x2="166" y2="375" stroke="#818cf8" stroke-width="0.5" opacity="0.1"/>
+        <line x1="332" y1="0" x2="332" y2="375" stroke="#818cf8" stroke-width="0.5" opacity="0.1"/>
+        <!-- Main bbox -->
+        <rect x="60" y="50" width="210" height="210" rx="4" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.7"/>
+        <polyline points="60,70 60,50 80,50"   fill="none" stroke="#818cf8" stroke-width="3"/>
+        <polyline points="250,50 270,50 270,70"  fill="none" stroke="#818cf8" stroke-width="3"/>
+        <polyline points="60,240 60,260 80,260"  fill="none" stroke="#818cf8" stroke-width="3"/>
+        <polyline points="250,260 270,260 270,240" fill="none" stroke="#818cf8" stroke-width="3"/>
+        <!-- Label -->
+        <rect x="60" y="34" width="90" height="18" rx="3" fill="#818cf8"/>
+        <rect x="66" y="40" width="70" height="6" rx="2" fill="#0d0d1a"/>
+        <!-- Second bbox -->
+        <rect x="310" y="90" width="140" height="130" rx="4" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.65"/>
+        <polyline points="310,104 310,90 324,90"  fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <polyline points="436,90 450,90 450,104"  fill="none" stroke="#f59e0b" stroke-width="2"/>
+        <!-- REC dot -->
+        <circle cx="470" cy="28" r="7" fill="#ef4444" opacity="0.9"/>
+        <!-- Tracking trail -->
+        <circle cx="165" cy="155" r="4"   fill="#22d3ee" opacity="0.9"/>
+        <circle cx="154" cy="175" r="3"   fill="#22d3ee" opacity="0.65"/>
+        <circle cx="146" cy="195" r="2.2" fill="#22d3ee" opacity="0.4"/>
+        <!-- Bottom bar -->
+        <rect x="0" y="345" width="500" height="30" fill="#818cf8" opacity="0.05"/>
+        <rect x="20" y="355" width="130" height="7" rx="3" fill="#818cf8" opacity="0.5"/>
+        <rect x="380" y="355" width="90" height="7" rx="3" fill="#22d3ee" opacity="0.35"/>
       </svg>
       <div class="post-body">
-        <div class="post-tag">Essay · AI</div>
-        <div class="post-title">Why most AI explanations are written for the writer, not the reader</div>
-        <div class="post-excerpt">The best popularizers of science share one overlooked trait: they never forget how confused they once were. Here's what that looks like in practice.</div>
+        <div class="post-tag">Computer Vision · Startup</div>
+        <div class="post-title">Building a dog daycare AI: YOLO, tracking y el MVP que nadie pidió (pero todos necesitan)</div>
+        <div class="post-excerpt">Cómo pasé de detectar perros con YOLOv8 a diseñar un producto B2B con tracking multi-objeto, logs semánticos y resúmenes automáticos con LLM. El proceso real, sin filtros.</div>
         <div class="post-meta">
-          <span>May 2025</span>
+          <span>May 2026</span>
           <span>·</span>
-          <span>8 min read</span>
+          <span>10 min read</span>
         </div>
       </div>
     </div>
@@ -743,30 +879,29 @@
     <!-- Post 2 -->
     <div class="post-card">
       <svg class="post-thumb short" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="225" fill="#f0f7ff"/>
-        <!-- Grid of small squares — represents math / stats -->
-        <g opacity="0.15">
-          <rect x="40"  y="40"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="60"  y="40"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="80"  y="40"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="40"  y="60"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="60"  y="60"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="80"  y="60"  width="14" height="14" rx="2" fill="#1c1207"/>
-          <rect x="40"  y="80"  width="14" height="14" rx="2" fill="#1c1207"/>
-        </g>
-        <!-- Highlighted squares (accent) -->
-        <rect x="60"  y="80"  width="14" height="14" rx="2" fill="#d4622a" opacity="0.5"/>
-        <rect x="80"  y="60"  width="14" height="14" rx="2" fill="#d4622a" opacity="0.8"/>
-        <!-- Big text element -->
-        <text x="140" y="130" font-size="72" font-weight="bold" fill="#1c1207" opacity="0.07" font-family="Georgia">∑</text>
-        <rect x="140" y="160" width="180" height="10" rx="5" fill="#1c1207" opacity="0.08"/>
-        <rect x="140" y="178" width="130" height="8" rx="4" fill="#1c1207" opacity="0.06"/>
+        <rect width="400" height="225" fill="#0d0d1a"/>
+        <!-- Bar chart dark -->
+        <rect x="40"  y="160" width="28" height="44" rx="3" fill="#818cf8" opacity="0.4"/>
+        <rect x="78"  y="132" width="28" height="72" rx="3" fill="#818cf8" opacity="0.55"/>
+        <rect x="116" y="104" width="28" height="100" rx="3" fill="#818cf8" opacity="0.7"/>
+        <rect x="154" y="80"  width="28" height="124" rx="3" fill="#818cf8" opacity="0.85"/>
+        <rect x="192" y="58"  width="28" height="146" rx="3" fill="#818cf8"/>
+        <rect x="230" y="90"  width="28" height="114" rx="3" fill="#f59e0b" opacity="0.8"/>
+        <rect x="268" y="120" width="28" height="84"  rx="3" fill="#818cf8" opacity="0.5"/>
+        <!-- X axis -->
+        <line x1="36" y1="205" x2="316" y2="205" stroke="#f0f0f8" stroke-width="1" opacity="0.08"/>
+        <!-- Trend line -->
+        <polyline points="54,160 92,132 130,104 168,80 206,58 244,90 282,120" fill="none" stroke="#22d3ee" stroke-width="1.5" opacity="0.55" stroke-dasharray="4,2"/>
+        <!-- Legend mockup -->
+        <rect x="340" y="50" width="40" height="6" rx="2" fill="#818cf8" opacity="0.5"/>
+        <rect x="340" y="64" width="36" height="6" rx="2" fill="#f59e0b" opacity="0.5"/>
+        <rect x="340" y="78" width="38" height="6" rx="2" fill="#22d3ee" opacity="0.5"/>
       </svg>
       <div class="post-body">
-        <div class="post-tag">Mathematics</div>
-        <div class="post-title">Linear algebra finally clicked when I stopped memorizing</div>
+        <div class="post-tag">Data · Python</div>
+        <div class="post-title">Cómo entreno a mis perros como si fuera una data pipeline</div>
         <div class="post-meta">
-          <span>Apr 2025</span>
+          <span>Abr 2026</span>
           <span>·</span>
           <span>6 min read</span>
         </div>
@@ -776,28 +911,37 @@
     <!-- Post 3 -->
     <div class="post-card">
       <svg class="post-thumb short" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="225" fill="#f5f0fa"/>
-        <!-- Spaced repetition curve mockup -->
-        <polyline points="40,180 100,140 160,155 220,100 280,115 340,70 360,65" fill="none" stroke="#7c3aed" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
-        <!-- Dots on curve -->
-        <circle cx="40"  cy="180" r="5" fill="#7c3aed" opacity="0.5"/>
-        <circle cx="160" cy="155" r="5" fill="#7c3aed" opacity="0.5"/>
-        <circle cx="280" cy="115" r="5" fill="#7c3aed" opacity="0.5"/>
-        <circle cx="360" cy="65"  r="7" fill="#7c3aed" opacity="0.9"/>
-        <!-- Vertical review lines -->
-        <line x1="100" y1="140" x2="100" y2="185" stroke="#7c3aed" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
-        <line x1="220" y1="100" x2="220" y2="185" stroke="#7c3aed" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
-        <line x1="340" y1="70"  x2="340" y2="185" stroke="#7c3aed" stroke-width="1" opacity="0.2" stroke-dasharray="3,3"/>
-        <!-- X axis -->
-        <line x1="40" y1="185" x2="370" y2="185" stroke="#1c1207" stroke-width="1" opacity="0.1"/>
+        <rect width="400" height="225" fill="#0d0d1a"/>
+        <!-- API / network diagram -->
+        <!-- Center node -->
+        <circle cx="200" cy="112" r="26" fill="#818cf8" opacity="0.12" stroke="#818cf8" stroke-width="1.5"/>
+        <circle cx="200" cy="112" r="8"  fill="#818cf8" opacity="0.8"/>
+        <!-- Outer nodes -->
+        <circle cx="90"  cy="55"  r="11" fill="#f59e0b" opacity="0.65"/>
+        <circle cx="310" cy="55"  r="11" fill="#f59e0b" opacity="0.65"/>
+        <circle cx="90"  cy="170" r="11" fill="#22d3ee" opacity="0.55"/>
+        <circle cx="310" cy="170" r="11" fill="#22d3ee" opacity="0.55"/>
+        <circle cx="46"  cy="112" r="9"  fill="#818cf8" opacity="0.4"/>
+        <circle cx="354" cy="112" r="9"  fill="#818cf8" opacity="0.4"/>
+        <!-- Connector lines -->
+        <line x1="200" y1="112" x2="90"  y2="55"  stroke="#f59e0b" stroke-width="1" opacity="0.3"/>
+        <line x1="200" y1="112" x2="310" y2="55"  stroke="#f59e0b" stroke-width="1" opacity="0.3"/>
+        <line x1="200" y1="112" x2="90"  y2="170" stroke="#22d3ee" stroke-width="1" opacity="0.3"/>
+        <line x1="200" y1="112" x2="310" y2="170" stroke="#22d3ee" stroke-width="1" opacity="0.3"/>
+        <line x1="200" y1="112" x2="46"  y2="112" stroke="#818cf8" stroke-width="1" opacity="0.2"/>
+        <line x1="200" y1="112" x2="354" y2="112" stroke="#818cf8" stroke-width="1" opacity="0.2"/>
+        <!-- Animated dots on lines -->
+        <circle cx="145" cy="84" r="3" fill="#f59e0b" opacity="0.85"/>
+        <circle cx="255" cy="84" r="3" fill="#f59e0b" opacity="0.85"/>
+        <circle cx="120" cy="145" r="3" fill="#22d3ee" opacity="0.7"/>
       </svg>
       <div class="post-body">
-        <div class="post-tag">Learning Science</div>
-        <div class="post-title">The spaced repetition habit I actually kept</div>
+        <div class="post-tag">Partner Engineering</div>
+        <div class="post-title">Lo que Uber Eats me enseñó sobre API integrations at scale</div>
         <div class="post-meta">
-          <span>Mar 2025</span>
+          <span>Mar 2026</span>
           <span>·</span>
-          <span>5 min read</span>
+          <span>7 min read</span>
         </div>
       </div>
     </div>
@@ -805,51 +949,51 @@
   </div>
 </div>
 
-<!-- ════ RESOURCES ════ -->
-<div class="resources-section" id="resources">
+<!-- ════ PROJECTS ════ -->
+<div class="resources-section" id="projects">
   <div class="resources-inner">
-    <h2>Free resources.</h2>
-    <p>Things I've made that you can use right now, no email required.</p>
+    <h2>What I'm building.</h2>
+    <p>Proyectos activos — algunos en producción, otros en construcción.</p>
 
     <div class="resources-list reveal">
 
       <a href="#" class="resource-row">
-        <div class="resource-icon" style="background:#fde8d8;">📖</div>
+        <div class="resource-icon" style="background:rgba(129,140,248,0.12);">🐶</div>
         <div class="resource-info">
-          <div class="resource-name">The Intuitive Probability Guide</div>
-          <div class="resource-desc">A 40-page PDF covering Bayesian thinking without a stats background. 18,000+ downloads.</div>
+          <div class="resource-name">DogTrack AI — Computer Vision para guarderías</div>
+          <div class="resource-desc">Plataforma B2B con YOLOv8 + tracking (Norfair) + LLM summaries. Ezviz H6c Pro, RTSP/ONVIF, logs semánticos automáticos del comportamiento.</div>
         </div>
-        <div class="resource-type">PDF · Free</div>
+        <div class="resource-type">MVP · En progreso</div>
+        <div class="resource-arrow">→</div>
+      </a>
+
+      <a href="https://github.com/Robbie-Ortega/claude_learning" class="resource-row" target="_blank">
+        <div class="resource-icon" style="background:rgba(34,211,238,0.1);">🧠</div>
+        <div class="resource-info">
+          <div class="resource-name">AI Learning Lab — Master's en IA Aplicada</div>
+          <div class="resource-desc">Notebooks, experimentos y proyectos del Master's. Python, ML, CV — aprendiendo en público con Claude Code como copilot.</div>
+        </div>
+        <div class="resource-type">GitHub · Abierto</div>
         <div class="resource-arrow">→</div>
       </a>
 
       <a href="#" class="resource-row">
-        <div class="resource-icon" style="background:#e8f4fd;">🎬</div>
+        <div class="resource-icon" style="background:rgba(245,158,11,0.1);">📊</div>
         <div class="resource-info">
-          <div class="resource-name">Neural Networks Explained in 20 Minutes</div>
-          <div class="resource-desc">A visual walkthrough of how deep learning actually works — no equations, just intuition.</div>
+          <div class="resource-name">Partner Engineering Playbook</div>
+          <div class="resource-desc">Frameworks y métricas para equipos de integración técnica: Found Rate, MCR, CQS, Order Injection Rate. Operando a escala global.</div>
         </div>
-        <div class="resource-type">Video · Free</div>
+        <div class="resource-type">Guía · Próximamente</div>
         <div class="resource-arrow">→</div>
       </a>
 
       <a href="#" class="resource-row">
-        <div class="resource-icon" style="background:#f0fdf4;">🗂</div>
+        <div class="resource-icon" style="background:rgba(129,140,248,0.1);">📈</div>
         <div class="resource-info">
-          <div class="resource-name">Study System Templates (Notion + Obsidian)</div>
-          <div class="resource-desc">The exact templates I use to structure learning projects, reading notes, and review schedules.</div>
+          <div class="resource-name">Azula &amp; Chowi — Entrenamiento data-driven</div>
+          <div class="resource-desc">Tracking del entrenamiento de una Doberman y un Pug: success rate, potty break effectiveness, crate timing. Porque los datos no mienten.</div>
         </div>
-        <div class="resource-type">Template · Free</div>
-        <div class="resource-arrow">→</div>
-      </a>
-
-      <a href="#" class="resource-row">
-        <div class="resource-icon" style="background:#faf0ff;">✦</div>
-        <div class="resource-info">
-          <div class="resource-name">The Feynman Technique — A Practical Workbook</div>
-          <div class="resource-desc">12 exercises for using the Feynman method to actually understand complex material.</div>
-        </div>
-        <div class="resource-type">Workbook · Free</div>
+        <div class="resource-type">Side project · Ongoing</div>
         <div class="resource-arrow">→</div>
       </a>
 
@@ -860,28 +1004,28 @@
 <!-- ════ NEWSLETTER ════ -->
 <div class="newsletter" id="newsletter">
   <div>
-    <h2>One essay,<br>once a week.<br><em>Worth it.</em></h2>
-    <p>I write about AI, learning, and building things with your brain. No noise, no growth hacking. Just the stuff I wish existed when I was starting out.</p>
+    <h2>Una nota,<br>una vez a la semana.<br><em>Sin ruido.</em></h2>
+    <p>Escribo sobre AI aplicada, product engineering y el proceso de construir un startup mientras lideras un equipo global. Sin fluff, sin growth hacking — solo perspectiva real de alguien que opera en ambos mundos.</p>
   </div>
   <div class="reveal">
     <div class="nl-form">
-      <input type="text" placeholder="Your name">
-      <input type="email" placeholder="Your email address">
-      <button class="btn-ink" style="width: 100%; text-align: center; border-radius: 8px; padding: 14px;">Subscribe — it's free</button>
-      <p class="nl-note">No spam, ever. Unsubscribe anytime with one click. I take your inbox seriously because mine matters to me too.</p>
+      <input type="text" placeholder="Tu nombre">
+      <input type="email" placeholder="Tu correo">
+      <button class="btn-primary" style="width:100%;text-align:center;border-radius:8px;padding:14px;border:none;cursor:pointer;">Suscribirse — es gratis</button>
+      <p class="nl-note">Sin spam. Sin algoritmos. Un correo cuando tenga algo que valga tu tiempo de leer.</p>
     </div>
   </div>
 </div>
 
 <!-- ════ FOOTER ════ -->
 <footer>
-  <a class="logo" href="#" style="text-decoration:none;"><strong>Maya</strong> Chen</a>
-  <p>© 2025 · San Francisco, CA</p>
+  <a class="logo" href="#" style="text-decoration:none;"><strong>Robbie</strong> Ortega</a>
+  <p>© 2026 · Ciudad de México 🇲🇽</p>
   <div class="footer-links">
-    <a href="#">Twitter</a>
-    <a href="#">YouTube</a>
-    <a href="#">GitHub</a>
-    <a href="#">RSS</a>
+    <a href="https://www.linkedin.com/in/robertoortegalopez/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Robbie-Ortega" target="_blank">GitHub</a>
+    <a href="#">Instagram</a>
+    <a href="#newsletter">Newsletter</a>
   </div>
 </footer>
 
