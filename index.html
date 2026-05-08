@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #EFFF00;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --text: #ffffff;
+      --muted: #888888;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-bottom: 1px solid #1e1e1e;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    .nav-cta {
+      background: var(--yellow);
+      color: #000;
+      border: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1a1a00;
+      color: var(--yellow);
+      border: 1px solid var(--yellow);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 span { color: var(--yellow); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: #000;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* FEATURES */
+    .features {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      color: var(--yellow);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      letter-spacing: -0.5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: var(--yellow); }
+
+    .icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* PRICING */
+    .pricing {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pricing h2 {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .pricing > p {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .plan {
+      background: var(--surface);
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+
+    .plan:hover { border-color: #333; }
+
+    .plan.featured {
+      border-color: var(--yellow);
+      position: relative;
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--yellow);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .plan h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .plan .price {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .plan .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .plan .desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .plan ul li {
+      font-size: 0.92rem;
+      color: var(--muted);
+      padding: 0.35rem 0;
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .plan ul li::before {
+      content: '✓';
+      color: var(--yellow);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .plan .btn-plan {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      border: 1px solid #333;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .plan.featured .btn-plan {
+      background: var(--yellow);
+      color: #000;
+      border-color: var(--yellow);
+    }
+
+    .plan .btn-plan:hover { opacity: 0.8; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid #1e1e1e;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer span { color: var(--yellow); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">VOLT</div>
+    <ul class="nav-links">
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <button class="nav-cta">Get Started</button>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">Now in Beta</div>
+    <h1>Build faster.<br /><span>Ship smarter.</span></h1>
+    <p>The all-in-one platform that supercharges your workflow. From idea to production in record time.</p>
+    <div class="cta-group">
+      <button class="btn-primary">Start for free</button>
+      <button class="btn-secondary">See how it works</button>
+    </div>
+  </section>
+
+  <section class="features">
+    <p class="section-label">Why Volt</p>
+    <h2>Everything you need to move fast</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Deploy in seconds, not hours. Our infrastructure is built for speed at every layer.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h3>Secure by Default</h3>
+        <p>Enterprise-grade security out of the box. Your data stays yours, always.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛠️</div>
+        <h3>Developer First</h3>
+        <p>Powerful APIs and integrations that fit right into your existing workflow.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Real-time Analytics</h3>
+        <p>See what's happening instantly. Make decisions backed by live data.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Built for Teams</h3>
+        <p>Collaborate seamlessly with role-based access and shared workspaces.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>Global Scale</h3>
+        <p>Serve users anywhere in the world with our distributed edge network.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <p class="section-label">Pricing</p>
+    <h2>Simple, transparent pricing</h2>
+    <p>No hidden fees. Cancel anytime.</p>
+    <div class="pricing-grid">
+
+      <div class="plan">
+        <h3>Free</h3>
+        <div class="price">$0 <span>/ mo</span></div>
+        <p class="desc">Perfect for personal projects and exploration.</p>
+        <ul>
+          <li>3 projects</li>
+          <li>5 GB storage</li>
+          <li>Community support</li>
+          <li>Basic analytics</li>
+        </ul>
+        <button class="btn-plan">Get started</button>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <h3>Pro</h3>
+        <div class="price">$29 <span>/ mo</span></div>
+        <p class="desc">For teams that need more power and flexibility.</p>
+        <ul>
+          <li>Unlimited projects</li>
+          <li>100 GB storage</li>
+          <li>Priority support</li>
+          <li>Advanced analytics</li>
+          <li>Custom domains</li>
+          <li>Team collaboration</li>
+        </ul>
+        <button class="btn-plan">Start free trial</button>
+      </div>
+
+      <div class="plan">
+        <h3>Enterprise</h3>
+        <div class="price">Custom</div>
+        <p class="desc">Tailored solutions for large organizations.</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Unlimited storage</li>
+          <li>Dedicated support</li>
+          <li>SSO & SAML</li>
+          <li>SLA guarantee</li>
+          <li>Custom integrations</li>
+        </ul>
+        <button class="btn-plan">Contact sales</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 <span>VOLT</span>. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
